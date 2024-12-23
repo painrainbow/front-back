@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<script src="/ПР2/task2.js"></script>
+<script>
+    function formatPhoneNumber(input) {
+        input.value = input.value.replace(/\D/g, '').replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3-$4-$5');
+    }
+
+    function validateForm(event) {
+        event.preventDefault(); 
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        if (username.trim() === '') {
+            alert('Пожалуйста, введите ваше имя.');
+            return;
+        }
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('Пожалуйста, введите корректный e-mail.');
+            return;
+        }
+        if (phone.trim() === '') {
+            alert('Пожалуйста, введите номер телефона.');
+            return;
+        }
+        alert('Форма успешно отправлена!');
+    }
+</script>
+<body>
+    <div>
+        <h1>Разработка веб-приложения</h1>
+    </div>
+    <div>
+        <p>Заполните форму и мы обязаельно свяжемся с вами в ближайшее время для уточнения деталей</p>
+    </div>
+    <form onsubmit="validateForm(event)">
+        <label for="username">Как вас зовут</label>
+        <input type="text" id="username" placeholder="Например: Иванов Иван Иванович" required>
+        
+        <label for="email">Ваш e-mail</label>
+        <input type="text" id="email" placeholder="test@mail.ru" required>
+
+        <label for="phonenumber">Телефон</label>
+        <input type="text" id="phone" oninput="formatPhoneNumber(this)" placeholder="+7 (919) 999 99 99" required>
+
+        <label for="country">Страна</label>
+        <select id="country" name="country">
+            <option value="Russia">Россия</option>
+        </select>
+
+        <label for="date">Дата</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="comment">Комментарий</label>
+        <textarea name="comment" id="comment"></textarea>
+
+        <label>
+            <input type="checkbox" name="consent" required>
+            Согласен на обработку персональных данных    
+        </label>
+
+        <button type="submit">Отправить заявку</button>
+    </form>        
+</body>
+</html>
